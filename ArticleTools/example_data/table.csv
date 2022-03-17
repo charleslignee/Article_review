@@ -1,0 +1,32 @@
+id,year,country,software,method,model
+\cite{Sun2022},2022, Guangzhou China, EnergyPlus, FD, CondFD
+\cite{Adilkhanova2021},2021," Nur-Sultan Kazakhstan, Karaganda Kazakhstan, Kokshetau Kazakhstan, Almaty Kazakhstan, Aktobe Kazakhstan, Atyrau Kazakhstan", EnergyPlus, FD, CondFD
+\cite{Mahdaoui2021},2021, Morocco, Ansys fluent, FD, enthalpy
+\cite{Arc2020},2020,, Fortran,FD,
+\cite{Gao2020},2020,, SIMPLEC algorithm, FV, enthalpy
+\cite{Kenzhekhanov2020},2020," Anchorage USA, Fort-McMurray Canada, Val-d'Or Canada, Umea Sweden, Oulu Finland, Arkhangelsk Russia, Surgut Russia, Bratsk Russia", EnergyPlus, FD, CondFD
+\cite{Yun2020},2020," Chuncheon Korea, Seoul Korea, Busan Korea, Jeju Korea", EnergyPlus, FD, CondFD
+\cite{Markarian2019},2019," Tehran Iran, Tabriz Iran, Bandar-Abas Ira, Shiraz Iran, Yazd Iran", EnergyPlus, FD, CondFD
+\cite{ElOuali2019},2019,, algorithm TDMA, FV, enthapy
+\cite{Ahangari2019},2019," Tehran Iran, Yazd Iran, Tabriz Iran, Bandaras Iran, Rasht Iran", EnergyPlus, FD, CondFD
+\cite{Fateh2019},2019, Genoa Italy, matlab, state-space model,
+\cite{Wijesuriya2018},2018, Phoenix USA, EnergyPlus, FD, CondFD
+\cite{Cascone2018},2018," Palermo Italy, Turin Italy", EnergyPlus, FD, CondFD
+\cite{Yang2017},2017,, Star-CCM, computational fluid dynamics,
+\cite{Liu2017},2017, Daquing China,,, enthalpy
+\cite{Mazzeo2017},2017, Turin Italy, TRNSYS, FD, suivi d'interface
+\cite{Elnajjar2017},2017, Al-Ain UAE, ANSYS FLUENT, FE, enthalpy
+\cite{Panayiotou2016},2016, Nicosia Cyprus, TRNSYS,, capacity
+\cite{Mi2016},2016," Shenyang China, Zhengzhou China, Changsha China, Kunming China, Hong-Kong China ", EnergyPlus, FD, CondFD
+\cite{Li2015},2015, Daqing China, ANSYS FLUENT, FV, enthalpy
+\cite{Bastani2015},2015, Trois-Rivi{\`{e}}res Canada, TRNSYS,,
+\cite{Alvarez2013},2013,, LIDER, FD, effective heat capacity
+\cite{Rodriguez-Ubinas2013},2013," Barcelona Spain, Bilbao Spain, Madrid Spain, Seville Spain, Soria Spain", PCMexpress,, enthalpy
+\cite{Evola2013},2013, Chambery France, EnergyPlus, FD, CondFD
+\cite{Kousksou2012},2012, Pau France,, VF, enthalpy
+\cite{Alawadhi2011},2011,, PGMR solver, FE,
+\cite{Yahaya2011},2011,,, FD, specific heat capacity
+\cite{Hafizal2010},2010, Malaysia,,,
+\cite{Kuznik2010},2010, Lyon France, TRNSYS, FD, effective heat capacity
+\cite{Zhou2007},2007,,, ASHRAE Handbook, enthalpy
+\cite{Koschenz2004},2004, Duebendorf Switzerland, TRNSYS, FD, Stefan problem

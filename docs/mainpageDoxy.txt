@@ -1,0 +1,195 @@
+# -*- coding: utf-8 -*-
+/**
+@mainpage
+L'analyse des données du projet MCPIBAT recquiert des outils spécifiques de traitement des données.\n
+Dans cette dynamique, des programmes en Python ont été développés et sont regroupés dans un dépôt sur le
+Git du laboratoire.\n
+Le nom du dépôt est **mcpibat_data_from_bdd**, il regroupe un bon nombre de scripts
+et de classes pour la collecte des données, la collecte de campagnes de mesures, le traitement des données 
+de calibration et bien d'autres.
+__________
+## Organisation des dossiers : ##
+Ce regroupement de programmes dispose d'une structure de travail afin d'assurer, faciliter son suivi
+et son utilisation.\n Dans cette démarche nous avons progressivement abouti à une structuration qui 
+est illustrée sur la figure ci-dessous :
+@image html StructureFolderCode.svg "Structure des dossiers"
+@image rtf StructureFolderCode.svg "Structure des dossiers"
+@image latex StructureFolderCode.svg "Structure des dossiers" width=12cm
+Ainsi l'espace de travail comporte six dossiers qui ont chacune une spécificité :
+> -# @b _Store est le dossier de stockage local de l'utilisateur pour qu'il sauvegarde des images, .csv et autres documents 
+> qui sont propres à son utilisation (ce dossier n'est donc pas sur le Git);
+> -# @b _Partage est un répertoire pour partager des fichiers de données .csv ou .xlsx, relatif à des paramètres qui nécessitent
+> d'être partagés à l'ensemble des utilisateurs;
+> -# @b Doxy est le dossier comportant tous les fichiers permettant de générer la documentation automatique ainsi que les 
+> images liées à la documentation.\n C'est dans le dossier DocCode que sera stockée la documentation (ce fichier n'est pas sur le Git);
+> -# @b scripExe comporte des sous-dossiers dans lesquels on retrouve des scripts d'exécution.\n
+> Ces scripts sont classés en fonction de leur utilisation. Par exemple pour un livrable, des tracés
+> ont été effectués et leurs scripts ont été répertoriés afin de faciliter le suivi du travail.
+> -# @b src comporte les codes sources. Il comporte également des sous-dossiers.\n
+> Dans ce répertoire il n'y a que des classes : les dossiers correspondent donc à des modules Python.\n
+> La figure ci-dessus illustre un exemple de sous-dossier.\n
+> @ref src.DataFromBdd : classe pour la collecte des données;\n
+> @ref src.ToolsAnalyse : classe comportant des outils d'analyse, i.e. la comparaison de températures;\n
+> @ref src.ToolsForIsolab : classe comportant des outils pour la conversion des données (et autres) pour Isolab;\n
+> -# @b Testing contient des scripts de Test des classes. \n
+> C'est dans cet espace que l'on définit des phases de test et qu'on 
+> les conservent et "standardise" pour vérifier le fonctionnement d'une classe.
+__________
+##Cadre de travail et objectif :##
+Cet outil permet de réaliser différents traitements.\n
+Au fur et à mesure que le projet avance, les besoins changent.\n
+Ici, on conserve le détail de ces traitements afin de faciliter leur réutilisation.
+> - Conversion des données de la bdd pour le code Isolab, voir @ref pageConversionIsolab;
+> - Evaluation de la calibration des données, voir @ref pagelaCalibration.
+> - Tracer des Testo, première analyse @ref pageTestoPremiere.
+*/
+
+
+/**
+@page pageConversionIsolab Collecte des données et conversion pour Isolab
+
+Les simulations sont effectuées à partir des données météo stockées dans la base de données du laboratoire.
+Pour les comparaisons entre les données expérimentales et les simulations numériques d'ISOLAB, des outils ont été développés sous Python afin de collecter les données météos, les mesures de températures et de flux. 
+Celles-ci sont ensuite enregistrées dans des fichiers sous un format spécifique permettant la prise en charge par ISOLAB. 
+La démarche adoptée est illustrée sur la figure
+  @image html DataBddForIsolab.png "Etapes pour la collecte des données"
+__________
+##Méthodologie :##
+Pour rendre les données de simulation et de mesures comparables, le fichier "pivot" a été créé de manière à faire correspondre les mêmes grandeurs mais ayant des appellations différentes selon leur provenance. 
+Ce fichier est un classeur Excel contenant deux feuilles : la première est nommée "choix_donnees" et la seconde "Nom_temperatures".
+
+
+Un exemple des deux types de fichiers sont présentés ci-dessous :
+> -# les données des Testo;
+>  @image html TestoCsv.svg "Données Testo"
+>  @image rtf TestoCsv.png "Données Testo"
+>  @image latex TestoCsv.png "Données Testo" width=12cm
+> -# les données des Campbell.
+>  @image html CampbellDat.svg "Données campbell" width=1000px
+>  @image rtf CampbellDat.png "Données campbell"
+>  @image latex CampbellDat.png "Données campbell" width=12cm
+__________
+##Programme pour lire ces fichiers:##
+- La lecture des fichiers s'effectue avec @ref DataToBdd.ReadData.
+ - Numéro de série;
+ - Testo;
+ - Campbell.
+*/
+
+/**
+@page pagelaCalibration Calibration des capteurs
+L'organisation des dossiers, sous-dossiers et fichiers de stockage est 
+illustrée sur la figure ci-dessous :
+  @image html StructureFile.svg "Structure des fichiers"
+  @image rtf StructureFile.png "Structure des fichiers"
+  @image latex StructureFile.png "Structure des fichiers" width=12cm
+On distingue les sous-dossiers relatifs aux centrales 
+d'acquisition CA1, CA2, meteo et TESTO. Pour les centrales 
+d'acquisition Campbell, CA1, CA2 et meteo, les sous-dossiers sont structurés de manière à comporter :
+> - des sous-sous-dossiers mensuels comportant des fichiers ".dat";
+> - un fichier ".dat" correspondant aux mesures collectées actuellement;
+> - un batch créant le dossier mensuel, déplaçant et renommant le fichier de 
+> mesure avec la date de déplacement 
+>(le batch est executé automatiquement par le logiciel de collecte 
+> de données Loggernet à une heure précise).
+Pour les centrales Testo, les sous-sous-dossiers sont organisés en 
+campagne avec une standardisation du nom de fichier détaillé ci-dessous : 
+  @image html StructureFichiersTesto.svg "Standardisation du nom de fichier Testo"
+  @image rtf StructureFichiersTesto.png "Standardisation du nom de fichier Testo"
+  @image latex StructureFichiersTesto.png "Standardisation du nom de fichier Testo" width=12cm
+*/
+
+/**
+@page pageTestoPremiere Première analyse des Testo
+_________
+##Méthodologie :##
+La gestion des données doit être établie par une base de données :
+> -# Créer une base de données;
+> -# Etablir la connexion vers la Bdd;
+> -# Lister les fichiers à insérer en base de données;
+> -# Lire les données :
+>  - identifier le type de données Testo ou Campbell;
+>  - récupérer les informations utiles pour la traçabilité des données.
+> -# insérer les données en base : 
+>  - insérer en évitant les redondances.
+> -# Automatiser l'insertion en base.
+__________
+##Réalisation :##
+Cette phase de mise en base passe par de nombreuses étapes de développement : 
+> -# La base de données choisie est du Postgrey, sa mise en place comporte
+> une structure conséquente pour s'assurer du bon suivi des données;
+> -# @ref DataToBdd.ConnexionDataBasePsql effectue la connexion du code Python
+>  vers la base de données en utilisant sqlalchemy et psycopg2;
+> -# @ref DataToBdd.FolderAndFile définit la liste des fichiers de données
+> à insérer en base;
+> -# @ref DataToBdd.ReadData charge les données des fichiers bruts, elle récupère :
+>  - les données des Testo ou Campbell;
+>  - le numéro de série et toutes informations utiles.
+> -# L'insertion des données en base s'effectue après deux étapes de pré-insertion :
+>  -# @ref DataToBdd.PreSendData pré-insère les données utiles, telles que :
+>   - les centrales d'acquisition, les fabricants, le mode d'insertion, les capteurs, etc.; \n
+> Les fichiers de pré-insertion et les tables en bdd associées sont définis 
+> dans @ref pagePre. \n
+>  -# @ref DataToBdd.CampagneToBdd insère les campagnes de mesures.\n
+> Elle associe les capteurs à une centrale de mesure.\n
+> Les éléments à pré-insérer sont définis dans @ref pageCampagne
+>  -# @ref DataToBdd.SendDataToBdd effectue l'insertion des données.\n
+> Elle insère les données des mesures (fichiers Testo ou Campbell @ref pageFormat), dans la mesure
+> où les capteurs sont déclarés ainsi que la campagne par les deux étapes de pré-insertion.
+*/
+
+/**
+@page pagePre Comparaison des données Isolab et expérimentales
+La comparaison des données entre le code Isolab et les données 
+expérimentales est importante. \n
+Aussi, une classe en python a été développée pour faciliter l'exploitation 
+des résultats et ainsi maximiser l'éfficacité de l'interprétation.\n 
+L'approche adoptée vise à regrouper l'ensemble des graphiques dans 
+un rapport au format PDF et d'y insérer une analyse statistique permettant
+ d'évaluer la comparaison.
+__________
+##Méthodologie :##
+Chaque simulation est enregistrée dans un dossier nommé "Simu_aaaa-mm-jj", 
+donnant l'information sur la date à laquelle la simulation a été effectuée et
+le nom de simulation correspondant à un ensemble de paramètres qui sont décrits dans le dossier.
+Le caractère "_" sert de séparateur pour identifier les champs.\n
+De plus, il comprend au total 6 documents distincts : 
+1) le fichier descriptif du bâtiment, 
+2) les données d'entrée d'Isolab, 
+3) les résultats en sortie d'Isolab, 
+4) le fichier des mesures, 
+5) le fichier pivot permettant de faire le lien entre les grandeurs d'Isolab et les mesures et 
+6) le rapport résumant toute la simulation.
+
+
+Nomenclature des fichiers (pour tous les fichiers le caractère "_" est utilisé comme séparateur):
+> -# <b> fichier descriptif du bâtiment (.btm, 3 champs)</b>: <em> batiment_lieu_parametres.btm </em>, ex : <em> algeco0_Saint-Pierre_a09-hceT-test1.btm </em>
+> 	- <em> batiment </em> : 
+>		- algeco0 : Algeco sans enduit MCP 
+>		- algeco1 : Algeco avec enduit MCP sur la paroi Nord de la cellule B
+>		.
+>	- <em> lieu </em> : Saint-Pierre ou Tampon
+>	- <em> parametres avec séparateur "-"</em> :
+>		- aXY : coefficient d'absorption alpha = X.Y (ex : a09 pour alpha = 0.9)
+>		- emXY : coefficient d'émissivité epsilon = X.Y (ex : e03 pour epsilon = 0.3)		
+>		- hceX : coefficient de convection extérieur hce calculé avec le modèle de Tourrand (T) ou Sturrock (S)
+>		- numTest (option): permet de résumer les paramétrages précédents pour référencer le fichier de résultats d'Isolab sans indiquer tous les paramètres.
+>		.
+> -# <b> fichier de données météo et températures en entrée d'Isolab (.dat, 2 champs)</b> : <em> lieu_dateDebut-dateFin.dat </em>, ex : <em> Saint-Pierre_20200612-20200618.dat </em>
+>	- <em> dateDebut-dateFin </em> : date de début et de fin avec séparateur "-"
+>	  - dateDebut : écrit sous le format 'aaaammmjj' et commence à 00h00min
+>	  - dateFin : écrit sous le format 'aaaammjj' et finit à 23h59min
+> -# <b> fichier pivot (.xlsx)</b> : <em> pivot_batiment_lieu.xlsx </em>, où batiment = algecoX, ex : <em> pivot1_algeco0_Saint-Pierre.xlsx </em>
+> 	- <em> pivot </em> définit la correspondance utilisé entre ISOLAB et les mesures, exemple :
+>	  - pivot1 : peut utiliser plusieurs mesures  pour une moyenne
+>	  - pivot2 : peut utiliser un point de mesure
+> -# <b> fichier résultats issus d'Isolab (.xls, 4 champs généré automatiquement à partir des entrées)</b> : <em> batiment_lieu_dateDebut-dateFin_parametres.xls </em>, ex : <em> algeco0_Saint-Pierre_20200612-20200618_a09-hceT-test1.xls </em>
+> -# <b> fichier contenant les mesures (.csv, 3 champs + en option) </b> : <em> lieu_dateDebut-dateFin_grandeur1_grandeur2.csv </em>, où la grandeur peut être la température, abrégée en 'temp' ou le flux. Ex : <em> Saint-Pierre_20200612-20200618_temp.csv </em>
+> -# <b> rapport PDF (.pdf, 4 champs)</b> : <em> batiment_lieu_dateDebut-dateFin_parametres.pdf </em>, ex : <em> algeco0_Saint-Pierre_20200612-20200618_a09-hceT-test1.pdf </em>	
+
+
+Les étapes pour l'exploitation des données sont illustrées sur la figure ci-dessous, 
+où l'on retrouve le dispositionnement des différents fichiers avec leur extension.
+  @image html FullDescri.png "Description des étapes pour l'exploitation des résultats"
+
+*/

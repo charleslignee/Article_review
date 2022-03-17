@@ -1,0 +1,25 @@
+ Description détaillé
+
+{{#argsExist}}
+Arguments
+---------
+    {{#args}} 
+    {{var}} [{{typePlaceholder}}] : description
+    {{/args}}
+{{/argsExist}}
+
+{{#kwargsExist}}
+Arguments optionnel
+-------------------
+    {{#kwargs}}
+    {{var}} [{{typePlaceholder}}] ({{&default}}) : description
+    {{/kwargs}}
+    {{/kwargsExist}}
+
+    {{#returnsExist}}
+Sortie
+------
+    {{#returns}}
+    [{{typePlaceholder}}] : description
+    {{/returns}}
+    {{/returnsExist}}
